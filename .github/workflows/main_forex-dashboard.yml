@@ -66,4 +66,4 @@ jobs:
         with:
           app-name: 'forex-dashboard'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_41D5465239D7411591D98BD3C171881F }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D1A29A3071DB49F9AA835BFD2DC5C18C }}
