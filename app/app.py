@@ -26,23 +26,26 @@ selected_date = st.date_input("Select Date", value=date.today())
 
 # Button to invoke API
 if st.button("Get Rate"):
-    # Formatting the date in the required format (DD-MM-YYYY)
-    formatted_date = selected_date.strftime("%d-%m-%Y")
-    
-    # Constructing the URL
-    url = f"https://coe-apim-02.azure-api.net/forex/rate?baseCurrency={base_currency}&targetCurrency={target_currency}&date={formatted_date}"
-    
-    # Setting the headers
-    headers = {
-        "Ocp-Apim-Subscription-Key": subscription_key
-    }
-    
-    # Making the API request
-    response = requests.get(url, headers=headers)
-    
-    if response.status_code == 200:
-        st.success("Request Successful")
-        st.write("Exchange Rate:", response.json())
+    if base_currency == target_currency:
+        st.error("Base currency and target currency cannot be the same. Please select different currencies.")
     else:
-        st.error(f"No Data found. Respopnse code: INT-{response.status_code}")
-        st.write(response.text)
+        # Formatting the date in the required format (DD-MM-YYYY)
+        formatted_date = selected_date.strftime("%d-%m-%Y")
+        
+        # Constructing the URL
+        url = f"https://coe-apim-02.azure-api.net/forex/rate?baseCurrency={base_currency}&targetCurrency={target_currency}&date={formatted_date}"
+        
+        # Setting the headers
+        headers = {
+            "Ocp-Apim-Subscription-Key": subscription_key
+        }
+        
+        # Making the API request
+        response = requests.get(url, headers=headers)
+        
+        if response.status_code == 200:
+            st.success("Request Successful")
+            st.write("Exchange Rate:", response.json())
+        else:
+            st.error(f"No Data found. Response code: INT-{response.status_code}")
+            st.write(response.text)
