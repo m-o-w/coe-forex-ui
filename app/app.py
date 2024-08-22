@@ -44,5 +44,5 @@ if st.button("Get Rate"):
         st.success("Request Successful")
         st.write("Exchange Rate:", response.json())
     else:
-        st.error(f"Request Failed: {response.status_code}")
+        st.error(f"No Data found. Respopnse code: INT-{response.status_code}")
         st.write(response.text)
