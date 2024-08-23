@@ -1,6 +1,8 @@
 import streamlit as st
 import requests
 from datetime import date
+import urllib.request
+import os
 
 # List of possible currencies
 currencies = [
@@ -9,14 +11,18 @@ currencies = [
     "GBP"
 ]
 
-# API subscription key
-subscription_key = "196b986195024d4699c982b6a4b740e1"
+# Retrieve the API subscription key from environment variable
+subscription_key = os.getenv("OCP_APIM_SUBSCRIPTION_KEY")
+
+if not subscription_key:
+    st.error("Ocp-Apim-Subscription-Key environment variable not set.")
+    st.stop()
 
 # Streamlit UI
 st.title("Forex Rate Fetcher")
 
 # Sidebar with tabs
-tab = st.sidebar.selectbox("Select Tab", ["Get Forex Rates", "Design"])
+tab = st.sidebar.selectbox("Select Tab", ["Get Forex Rates", "Design", "About"])
 
 if tab == "Get Forex Rates":
     st.write("Select the base and target currencies, and choose a date to fetch the exchange rate.")
@@ -57,3 +63,17 @@ if tab == "Get Forex Rates":
 elif tab == "Design":
     st.write("Design Image")
     st.image("Design.jpg")
+
+elif tab == "About":
+    st.write("About")
+    
+    # URL of the README file
+    readme_url = "https://raw.githubusercontent.com/m-o-w/coe-forex-ui/main/README.md"
+    
+    # Fetch the content of the README file
+    try:
+        response = urllib.request.urlopen(readme_url)
+        readme_text = response.read().decode("utf-8")
+        st.markdown(readme_text)
+    except Exception as e:
+        st.error(f"Unable to fetch README file: {e}")
