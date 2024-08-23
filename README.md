@@ -4,7 +4,7 @@ The application is deployed on Azure and consists of several interconnected comp
 
 1. **User/Application Interaction:**
    - **API Client/User:** Users or applications interact with the system via an API exposed through Azure API Management (APIM).
-   - **Azure App Service:** Serves as the hosting platform for the API, handling incoming requests.
+   - **Azure App Service:** Hosts a web application that presents a UI written in Streamlit using Python. This application provides a graphical interface for users to test the API by entering values and fetching responses. It handles incoming requests and serves the UI to interact with the underlying services.
 
 2. **Forex Data Handling:**
    - **Mock Forex API (Azure Function):** A serverless function on Azure that generates or fetches forex data from an external forex data source.
